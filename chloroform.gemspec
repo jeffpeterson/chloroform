@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jeff Peterson"]
   spec.email         = ["jeff@petersonj.com"]
   spec.description   = %q{Placeholder for js color finder.}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.summary       = %q{Knock yourself out finding color in images.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
