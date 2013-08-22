@@ -1,5 +1,5 @@
 require "chloroform/version"
+require "chloroform/engine" if defined?(::Rails)
 
 module Chloroform
-  # Your code goes here...
 end
