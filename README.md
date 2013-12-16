@@ -1,26 +1,64 @@
-# Chloroform
+Chloroform
+==========
 
-TODO: Write a gem description
+Feeling colorless?
 
-## Installation
+`Chloroform` will find color for you!
 
-Add this line to your application's Gemfile:
+Installation
+------------
 
-    gem 'chloroform'
+Add [`chloroform.js`](https://rawgithub.com/jeffpeterson/chloroform/master/app/assets/javascripts/chloroform.js.coffee) to your project.
 
-And then execute:
 
-    $ bundle
+### Rails
 
-Or install it yourself as:
+add `chloroform` to your Gemfile:
 
-    $ gem install chloroform
+```ruby
+gem 'chloroform'
+```
 
-## Usage
+run `bundle`
 
-TODO: Write usage instructions here
 
-## Contributing
+Usage
+-----
+
+All you need to do is pass a url to an image and a callback that will
+be called when the processing is done.
+
+The resulting colors will be passed to the callback.
+
+Each color is a string containing comma-separated RGB values:
+
+- `"255,255,255"` for white
+- `"0,0,0"` for black
+- `"255,0,0"` for red
+- etc.
+
+- `background` is the background color of the image.
+
+- `primary`, `secondary`, and `detail` are the most popular colors that
+  contrast the background.
+
+- `contrast` will be white for dark backgrounds and
+  black for light backgrounds.
+
+```javascript
+Chloroform.analyze(image_url, function(colors) {
+  colors.background;
+
+  colors.primary;
+  colors.secondary;
+  colors.detail;
+
+  colors.contrast;
+});
+```
+
+Contributing
+------------
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
