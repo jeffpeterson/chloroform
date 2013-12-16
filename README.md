@@ -6,7 +6,7 @@ Feeling colorless? `Chloroform` is here to help.
 Usage
 -----
 
-Does this rag smell funny to you? Shhh...
+Does this rag smell funny to you?
 
 Add [`chloroform.js`](https://rawgithub.com/jeffpeterson/chloroform/master/chloroform.js) to your project.
 
