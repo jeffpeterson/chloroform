@@ -5,8 +5,11 @@ base.Chloroform = function(imageUrl, options) {
 
   o = this.options = options || {};
 
+  o.count     || (o.count     = 3);
+  o.subsample || (o.subsample = 0);
+
   this.imageUrl          = imageUrl;
-  this.colors            = [];
+  this.colors            = {};
   this.canvas            = document.createElement('canvas');
   this.canvas.width      = this.width;
   this.canvas.height     = this.height;
@@ -29,30 +32,31 @@ base.Chloroform.prototype = {
     return this;
   },
 
-  analyze: function(callback, options) {
+  analyze: function(callback) {
     this.afterImageLoads(function(){
-      this.analyzeNow(options);
+      this.analyzeNow();
       callback && callback(this.colors);
     });
 
     return this;
   },
 
-  analyzeNow: function(options) {
-    var colors;
-
-    options || (options = {});
+  analyzeNow: function() {
+    var colors, lastFoundColor;
 
     this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
 
     this.colors.background = this.findBackground();
     this.colors.contrast   = this.isDark(this.colors.background) ? '255,255,255' : '0,0,0';
+    lastFoundColor         = this.colors.contrast;
 
-    this.colors = this.findColors(this.imageData(), this.options).slice(0, 3);
+    colors = this.findColors(this.imageData(), {subsample: 1});
 
-    this.colors.primary   = this.colors[0];
-    this.colors.secondary = this.colors[1];
-    this.colors.detail    = this.colors[2];
+    for (var i = 0; i < this.options.count; i++) {
+      lastFoundColor = this.colors[i] = colors[i] || lastFoundColor;
+    }
+
+    return this;
   },
 
   imageData: function(left, top, width, height) {
@@ -116,15 +120,7 @@ base.Chloroform.prototype = {
       groupedCounts = this.groupColorsByCount(counts, diff += stepSize);
     }
 
-    return this.extendColors(this.colorsSortedByCount(counts), numberOfColors);
-  },
-
-  extendColors: function(colors, minLength) {
-    while (colors.length > minLength) {
-      colors[colors.length] = colors[colors.length - 1];
-    }
-
-    return colors;
+    return this.colorsSortedByCount(counts);
   },
 
   countColors: function(pixels, subsample) {
@@ -227,7 +223,7 @@ base.Chloroform.prototype = {
 Chloroform.analyze = function(imageUrl, options, callback) {
   if (!callback) {
     callback = options;
-    options = null;
+    options  = {};
   }
 
   return new Chloroform(imageUrl, options).analyze(callback);

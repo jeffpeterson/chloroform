@@ -1,31 +1,16 @@
 Chloroform
 ==========
 
-Feeling colorless?
-
-`Chloroform` will find color for you!
-
-Installation
-------------
-
-Add [`chloroform.js`](https://rawgithub.com/jeffpeterson/chloroform/master/app/assets/javascripts/chloroform.js.coffee) to your project.
-
-
-### Rails
-
-add `chloroform` to your Gemfile:
-
-```ruby
-gem 'chloroform'
-```
-
-run `bundle`
-
+Feeling colorless? `Chloroform` is here to help.
 
 Usage
 -----
 
-All you need to do is pass a url to an image and a callback that will
+Does this rag smell funny to you? Shhh...
+
+Add [`chloroform.js`](https://rawgithub.com/jeffpeterson/chloroform/master/chloroform.js) to your project.
+
+Pass an image url and a callback that will
 be called when the processing is done.
 
 The resulting colors will be passed to the callback.
@@ -37,23 +22,18 @@ Each color is a string containing comma-separated RGB values:
 - `"255,0,0"` for red
 - etc.
 
-- `background` is the background color of the image.
+`background` is the background color of the image.
 
-- `primary`, `secondary`, and `detail` are the most popular colors that
-  contrast the background.
-
-- `contrast` will be white for dark backgrounds and
-  black for light backgrounds.
+`contrast` will be white for dark backgrounds and black for light backgrounds.
 
 ```javascript
 Chloroform.analyze(image_url, function(colors) {
   colors.background;
-
-  colors.primary;
-  colors.secondary;
-  colors.detail;
-
   colors.contrast;
+
+  colors[0];
+  colors[1];
+  colors[2];
 });
 ```
 
