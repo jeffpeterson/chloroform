@@ -76,27 +76,37 @@ base.Chloroform.prototype = {
 
     edgePixels = [];
 
-    // bottom
-    [].push.apply(
-      edgePixels,
-      this.imageData(
-        offset,
-        this.height - offset - size,
-        this.width - offset * 2,
-        size
-      )
-    );
+    // top
+    [].push.apply(edgePixels, this.imageData(
+      offset,
+      offset,
+      this.width - offset * 2,
+      size
+    ));
 
-    // right
-    [].push.apply(
-      edgePixels,
-      this.imageData(
-        this.width - offset - size,
-        offset,
-        size,
-        this.height - offset * 2 - size
-      )
-    );
+      // right
+    [].push.apply(edgePixels, this.imageData(
+      this.width - offset - size,
+      offset,
+      size,
+      this.height - offset * 2
+    ));
+
+      // bottom
+    [].push.apply(edgePixels, this.imageData(
+      offset,
+      this.height - offset - size,
+      this.width - offset * 2,
+      size
+    ));
+
+    // left
+    [].push.apply(edgePixels, this.imageData(
+      offset,
+      offset,
+      size,
+      this.height - offset * 2
+    ));
 
     return this.findColors(edgePixels, { count: 1 })[0]
   },
