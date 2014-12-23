@@ -1,0 +1,19 @@
+{
+  "name": "chloroform",
+  "version": "1.0.0",
+  "description": "Knock yourself out finding color",
+  "main": "chloroform.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffpeterson/chloroform.git"
+  },
+  "author": "Jeff Peterson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeffpeterson/chloroform/issues"
+  },
+  "homepage": "https://github.com/jeffpeterson/chloroform"
+}

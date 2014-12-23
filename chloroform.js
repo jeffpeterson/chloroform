@@ -1,6 +1,4 @@
-(function(base){
-
-base.Chloroform = function(imageUrl, options) {
+function Chloroform(imageUrl, options) {
   var o;
 
   o = this.options = options || {};
@@ -17,7 +15,7 @@ base.Chloroform = function(imageUrl, options) {
   this.image             = new Image();
 
   if (!/^data:/.test(this.imageUrl)) {
-    this.image.crossOrigin = "anonymous";
+    this.image.crossOrigin = 'anonymous';
   }
 }
 
@@ -93,12 +91,12 @@ base.Chloroform.prototype = {
     ));
 
       // bottom
-    [].push.apply(edgePixels, this.imageData(
-      offset,
-      this.height - offset - size,
-      this.width - offset * 2,
-      size
-    ));
+    // [].push.apply(edgePixels, this.imageData(
+    //   offset,
+    //   this.height - offset - size,
+    //   this.width - offset * 2,
+    //   size
+    // ));
 
     // left
     [].push.apply(edgePixels, this.imageData(
@@ -124,7 +122,9 @@ base.Chloroform.prototype = {
     counts = groupedCounts = this.countColors(pixels, subsample);
 
     for (var i = 0; i < 10; i++) {
-      if (Object.keys(counts).length <= numberOfColors) break;
+      if (Object.keys(counts).length <= numberOfColors) {
+        break;
+      }
 
       counts = groupedCounts;
       groupedCounts = this.groupColorsByCount(counts, diff += stepSize);
@@ -142,7 +142,9 @@ base.Chloroform.prototype = {
     for (var i = 0; i < pixels.length; i += step) {
       rgb = [pixels[i], pixels[i + 1], pixels[i + 2]];
 
-      if (this.colors.background && !this.contrastsBackground(rgb)) continue;
+      if (this.colors.background && !this.contrastsBackground(rgb)) {
+        continue;
+      }
 
       key = rgb.join(',');
 
@@ -160,7 +162,7 @@ base.Chloroform.prototype = {
   },
 
   groupColorsByCount: function(counts, diff) {
-    var groups, colors, i, j;
+    var groups, colors, i, j, bucket;
 
     groups = {};
     colors = this.colorsSortedByCount(counts);
@@ -185,15 +187,17 @@ base.Chloroform.prototype = {
 
 
   ybr: function(rgb) {
-    if (typeof rgb === 'string') return this.ybr(rgb.split(','));
+    if (typeof rgb === 'string') {
+      return this.ybr(rgb.split(','));
+    }
 
-    r = rgb[0];
-    g = rgb[1];
-    b = rgb[2];
+    var r = rgb[0];
+    var g = rgb[1];
+    var b = rgb[2];
 
-    y  =       (0.299    * r) + (0.587    * g) + (0.114    * b);
-    cb = 128 - (0.168736 * r) - (0.331264 * g) + (0.5      * b);
-    cr = 128 + (0.5      * r) - (0.418688 * g) - (0.081312 * b);
+    var y  =       (0.299    * r) + (0.587    * g) + (0.114    * b);
+    var cb = 128 - (0.168736 * r) - (0.331264 * g) + (0.5      * b);
+    var cr = 128 + (0.5      * r) - (0.418688 * g) - (0.081312 * b);
 
     return [y, cb, cr];
   },
@@ -239,4 +243,6 @@ Chloroform.analyze = function(imageUrl, options, callback) {
   return new Chloroform(imageUrl, options).analyze(callback);
 }
 
-})(this);
+if (typeof module !== 'undefined') {
+  module.exports = Chloroform
+}
