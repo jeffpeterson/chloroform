@@ -1,6 +1,6 @@
 {
   "name": "chloroform",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Knock yourself out finding color",
   "main": "chloroform.js",
   "scripts": {
