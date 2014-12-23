@@ -19,7 +19,7 @@ function Chloroform(imageUrl, options) {
   }
 }
 
-base.Chloroform.prototype = {
+Chloroform.prototype = {
   width:    100,
   height:   100,
 
